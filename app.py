@@ -22,6 +22,8 @@ cadena_odbc = (
 )
 cadena_conexion = quote_plus(cadena_odbc)
 
+#creacion de dataframes 
+
 engine = create_engine(f"mssql+pyodbc:///?odbc_connect={cadena_conexion}")
 
 df_producto = pd.read_sql("SELECT * FROM dbo.Producto" , engine)
@@ -34,8 +36,21 @@ df_producto_menor = pd.read_sql(
     engine
 )
 
-print(df_producto_menor)
 
 df_producto_prom = df_producto['precio'].mean()
 
 df_producto_prom = round(df_producto_prom, 2)
+# devolucion del precio de los productos
+print(f"El precio promedio es: {df_producto_prom}") 
+
+#lectura de los roles de los usuarios
+df_role = pd.read_sql("SELECT * FROM dbo.Rol" , engine)
+
+#lectura de los usuarios 
+df_usuario = pd.read_sql("SELECT * FROM dbo.Empleado" , engine)
+# localización del id del rol mesero
+df_role_mesero = df_role.loc[df_role['Rol'] == 'Mesero', 'id'].tolist()
+print(f"El id del rol mesero es: {df_role_mesero}")
+# lectura de los usuarios con el rol de mesero
+df_usuario_mesero = df_usuario.loc[df_usuario['rol_id'] == df_role_mesero[0]]
+print(f"Los usuarios con el rol de mesero son: {df_usuario_mesero}")
