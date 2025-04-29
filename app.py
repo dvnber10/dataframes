@@ -54,3 +54,11 @@ print(f"El id del rol mesero es: {df_role_mesero}")
 # lectura de los usuarios con el rol de mesero
 df_usuario_mesero = df_usuario.loc[df_usuario['rol_id'] == df_role_mesero[0]]
 print(f"Los usuarios con el rol de mesero son: {df_usuario_mesero}") 
+
+df_categoria = pd.read_sql("SELECT * FROM dbo.Categoria" , engine)
+# lectura de los productos con la categoria de entradas
+df_categoria_entradas = df_categoria.loc[df_categoria['nombre'] == 'Entradas', 'id'].tolist()
+print(f"El id de la categoria entradas es: {df_categoria_entradas}")
+# lectura de los productos con la categoria de entradas
+df_producto_entradas = df_producto.loc[df_producto['id_categoria'] == df_categoria_entradas[0]]
+print(f"Los productos con la categoria entradas son: {df_producto_entradas}")
