@@ -2,6 +2,8 @@ import pandas as pd
 from sqlalchemy import create_engine
 from urllib.parse import quote_plus
 from dotenv import load_dotenv
+import matplotlib.pyplot as plt
+import seaborn as sns
 import os
 
 load_dotenv()
@@ -62,3 +64,14 @@ print(f"El id de la categoria entradas es: {df_categoria_entradas}")
 # lectura de los productos con la categoria de entradas
 df_producto_entradas = df_producto.loc[df_producto['id_categoria'] == df_categoria_entradas[0]]
 print(f"Los productos con la categoria entradas son: {df_producto_entradas}")
+
+
+#creación de graficos 
+
+plt.figure(figsize=(10, 6))
+sns.histplot(df_producto['precio'], bins=20, kde=True)
+plt.title('Distribución de precios de productos')
+plt.xlabel('Precio')
+plt.ylabel('Cantidad de productos')
+plt.grid(True)
+plt.show()
