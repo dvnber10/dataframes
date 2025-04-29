@@ -53,4 +53,4 @@ df_role_mesero = df_role.loc[df_role['Rol'] == 'Mesero', 'id'].tolist()
 print(f"El id del rol mesero es: {df_role_mesero}")
 # lectura de los usuarios con el rol de mesero
 df_usuario_mesero = df_usuario.loc[df_usuario['rol_id'] == df_role_mesero[0]]
-print(f"Los usuarios con el rol de mesero son: {df_usuario_mesero}")
+print(f"Los usuarios con el rol de mesero son: {df_usuario_mesero}") 
